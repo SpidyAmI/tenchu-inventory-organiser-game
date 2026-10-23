@@ -20,7 +20,6 @@ public class OggettoController {
     public void click(){
         this.ic.handle(this.o);
     }
-    public OggettoInterface getOi(){return this.o;}
 
     public OggettoView getOv(){return this.ov;}
 }

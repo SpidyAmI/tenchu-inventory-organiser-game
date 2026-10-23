@@ -46,6 +46,7 @@ Desktop application written in **Java** with **JavaFX** for the UI. It is a gami
 
 - **Java Development Kit (JDK):** 25.0.1+
 - **JavaFX SDK:** 25.0.2+
+- **JUnit5**
 - **Build Tool:** none (default IntelliJ IDEA project setup, no Maven or Gradle)
 
 ---
@@ -72,7 +73,7 @@ Desktop application written in **Java** with **JavaFX** for the UI. It is a gami
 
 ## 🗺️ Roadmap
 
-- [ ] Add unit tests (JUnit 5)
+- [X] Add unit tests (JUnit 5)
 - [ ] Translate code and comments to English
 - [ ] Add screenshots
 - [ ] Complete the OOP principles section
