@@ -27,11 +27,11 @@ public class Main extends Application {
         List<CommonItem> commonItemList = new ArrayList<>();
         commonItemList.add(FactoryItem.getCommonItem("Kunai", 7));
         commonItemList.add(FactoryItem.getCommonItem("Rice", 2));
-        commonItemList.add(FactoryItem.getCommonItem("Smoke Bomb", 0));
+        commonItemList.add(FactoryItem.getCommonItem("Smoke", 0));
         List<RareItem> rareItemList = new ArrayList<>();
         rareItemList.add(FactoryItem.getRareItem("Armor", false));
         rareItemList.add(FactoryItem.getRareItem("Katana", true));
-        rareItemList.add(FactoryItem.getRareItem("Fire bomb", false));
+        rareItemList.add(FactoryItem.getRareItem("Fire", false));
         Collections.sort(rareItemList);
         Collections.sort(commonItemList);
         InventoryController ic = new InventoryController();

@@ -29,7 +29,7 @@ public class WarehouseController {
         this.itemControllerList = new ArrayList<>();
         List<ItemInterface> itemList = w.getItemInterfaceList();
         for(ItemInterface ii : itemList) {this.itemControllerList.add(new ItemController(ii,this));}
-        this.createInventoryView();
+        this.createWarehouseView();
     }
 
     public void setMv(MainView mainView) {
@@ -37,7 +37,7 @@ public class WarehouseController {
         this.mainView.setTopZone(this.wv);
     }
 
-    private void createInventoryView(){
+    private void createWarehouseView(){
         List<ItemView> itemViewList = new ArrayList<>();
         for(ItemController ic : this.itemControllerList) itemViewList.add(ic.getIv());
         this.wv = new WarehouseView(itemViewList);

@@ -32,13 +32,11 @@ Desktop application written in **Java** with **JavaFX** for the UI. It is a gami
 
 ## 🧬 Architecture and OOP Principles
 
-<!-- TODO: explain the OOP principles citing specific classes of the project, after the English translation is complete -->
-
-*   **Inheritance:** ...
-*   **Polymorphism:** ...
-*   **Encapsulation:** ...
-*   **Abstractions and Interfaces:** ...
-*   **MVC Pattern:** ...
+*   **Inheritance:** `CommonItem` and `RareItem` extend `Item`, and `DDA`, `DDS` and `DWA` extend `Code`, reusing the shared state and behaviour of their base class.
+*   **Polymorphism:** `GameEngine` runs every code through `CodeInterface.execute(...)`, and `Warehouse` treats common and rare items uniformly through `ItemInterface`.
+*   **Encapsulation:** fields are private, item constructors are package-private (items are built via `FactoryItem`), and the methods that change the inventory capacity or unlock items are package-private so only the codes can call them.
+*   **Abstractions and Interfaces:** `ItemInterface` and `CodeInterface` define the contracts, and the abstract classes `Item` and `Code` hold the common logic. New codes can be added without changing the rest of the code.
+*   **MVC Pattern:** the `Model` packages hold the game rules, the `View` classes only display data and forward user input, and the `Controller` classes connect the two and refresh the views.
 
 ---
 
@@ -63,9 +61,55 @@ Desktop application written in **Java** with **JavaFX** for the UI. It is a gami
 
 ## 📁 Project Structure
 
-<!-- TODO: add a tree view of the project's files, after the English translation is complete -->
+Here is a tree view of the project file structure:
 
-```text
+```
+.
+|-- src/
+|   |-- Controller/
+|   |   |-- Alerts/
+|   |   |   |-- Alerts.java
+|   |   |-- GameEngineController.java
+|   |   |-- InventoryController.java
+|   |   |-- ItemController.java
+|   |   |-- WarehouseController.java
+|   |-- Model/
+|   |   |-- CodesAndWarehouse/
+|   |   |   |-- Code.java
+|   |   |   |-- CodeInterface.java
+|   |   |   |-- DDA.java
+|   |   |   |-- DDS.java
+|   |   |   |-- DWA.java
+|   |   |   |-- Inventory.java
+|   |   |   |-- Warehouse.java
+|   |   |-- Exceptions/
+|   |   |   |-- InventoryFull.java
+|   |   |   |-- NinjaException.java
+|   |   |   |-- NotExistingCode.java
+|   |   |   |-- NotUnlockedItem.java
+|   |   |   |-- OutOfStockItem.java
+|   |   |-- Items/
+|   |   |   |-- CommonItem.java
+|   |   |   |-- FactoryItem.java
+|   |   |   |-- Item.java
+|   |   |   |-- ItemInterface.java
+|   |   |   |-- RareItem.java
+|   |   |-- GameEngine.java
+|   |-- View/
+|   |   |-- InventoryView.java
+|   |   |-- ItemView.java
+|   |   |-- MainView.java
+|   |   |-- WarehouseView.java
+|   |-- launcher.java
+|   |-- main.java
+|-- test/
+    |-- model/
+        |-- CodesAndWarehouse/
+        |   |-- InventoryTest.java
+        |   |-- WarehouseTest.java
+        |-- Items/
+        |   |-- ItemTest.java
+        |-- GameEngineTest.java
 
 ```
 
@@ -76,5 +120,5 @@ Desktop application written in **Java** with **JavaFX** for the UI. It is a gami
 - [X] Add unit tests (JUnit 5)
 - [X] Translate code and comments to English
 - [ ] Add screenshots
-- [ ] Complete the OOP principles section
-- [ ] Add the project tree in the Project Structure section
+- [X] Complete the OOP principles section
+- [X] Add the project tree in the Project Structure section

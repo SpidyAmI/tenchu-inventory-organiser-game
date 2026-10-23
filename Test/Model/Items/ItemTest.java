@@ -75,8 +75,8 @@ class ItemTest {
 
         @Test
         void compareToOrderByName() {
-            assertTrue(katana.compareTo(armor) < 0);
-            assertTrue(armor.compareTo(katana) > 0);
+            assertTrue(katana.compareTo(armor) > 0);
+            assertTrue(armor.compareTo(katana) < 0);
         }
 
         @Test
