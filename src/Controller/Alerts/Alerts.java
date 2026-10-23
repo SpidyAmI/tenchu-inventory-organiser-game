@@ -6,7 +6,7 @@ public class Alerts {
 
     public static void launchError(String info){
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("ERRORE");
+        alert.setTitle("ERROR");
         alert.setContentText(info);
         alert.showAndWait();
     }

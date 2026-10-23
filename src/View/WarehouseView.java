@@ -5,17 +5,17 @@ import javafx.scene.layout.VBox;
 
 import java.util.List;
 
-public class InventarioView extends VBox {
-    private List<OggettoView> listaOggettiView;
-    private final int DIMENSIONE_RIGA = 3;
+public class WarehouseView extends VBox {
+    private List<ItemView> itemViewList;
+    private final int ROW_DIMENSION = 3;
 
-    public InventarioView(List<OggettoView> listaOggettiView)
+    public WarehouseView(List<ItemView> itemViewList)
     {
-        this.listaOggettiView = listaOggettiView;
+        this.itemViewList = itemViewList;
         boolean firstTime = true;
         HBox toFill = new HBox();
-        for(int i = 0; i < this.listaOggettiView.size(); i++){
-            if(i % DIMENSIONE_RIGA == 0 ){
+        for(int i = 0; i < this.itemViewList.size(); i++){
+            if(i % ROW_DIMENSION == 0 ){
                 if(!firstTime){
                     toFill = new HBox();
                 }
@@ -25,7 +25,7 @@ public class InventarioView extends VBox {
                 this.getChildren().add(toFill);
             }
 
-            toFill.getChildren().add(this.listaOggettiView.get(i));
+            toFill.getChildren().add(this.itemViewList.get(i));
         }
 
         this.setSpacing(10);

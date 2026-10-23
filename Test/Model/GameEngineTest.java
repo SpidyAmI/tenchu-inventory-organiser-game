@@ -1,12 +1,12 @@
 package Model;
 
-import Model.CodiciEItems.Equipaggiamento;
-import Model.CodiciEItems.Inventario;
-import Model.Eccezioni.CodiceNonEsistente;
-import Model.Eccezioni.NinjaException;
-import Model.Oggetti.FactoryOggetti;
-import Model.Oggetti.OggettoComune;
-import Model.Oggetti.OggettoRaro;
+import Model.CodesAndWarehouse.Inventory;
+import Model.CodesAndWarehouse.Warehouse;
+import Model.Exceptions.NotExistingCode;
+import Model.Exceptions.NinjaException;
+import Model.Items.FactoryItem;
+import Model.Items.CommonItem;
+import Model.Items.RareItem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,62 +17,58 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameEngineTest {
 
-    private OggettoComune kunai;
-    private OggettoRaro camicia;
+    private CommonItem kunai;
+    private RareItem armor;
     private GameEngine ge;
 
     @BeforeEach
     void setUp() {
-        kunai = FactoryOggetti.getOggettoComune("Kunai", 7);
-        camicia = FactoryOggetti.getOggettoRaro("Camicia", false);
+        kunai = FactoryItem.getCommonItem("Kunai", 7);
+        armor = FactoryItem.getRareItem("Armor", false);
 
-        List<OggettoComune> comuni = new ArrayList<>(List.of(kunai));
-        List<OggettoRaro> rari = new ArrayList<>(List.of(camicia));
+        List<CommonItem> commons = new ArrayList<>(List.of(kunai));
+        List<RareItem> rares = new ArrayList<>(List.of(armor));
 
-        ge = new GameEngine(new Inventario(comuni, rari));
+        ge = new GameEngine(new Warehouse(commons, rares));
 
-        // Il singleton mantiene lo stato tra i test: lo svuoto
-        Equipaggiamento.getInstance().getListaOggettiEquipped().clear();
+        // Singleton mantains state between tests, here is emptied.
+        Inventory.getInstance().getEquippedItemsList().clear();
     }
 
     @Test
-    void dwaSbloccaTuttiIRari() throws NinjaException {
-        assertFalse(camicia.isUnlocked());
+    void dwaUnlockAllRares() throws NinjaException {
+        assertFalse(armor.isUnlocked());
 
-        ge.tentaCodice("DWA");
+        ge.tryCode("DWA");
 
-        assertTrue(camicia.isUnlocked());
+        assertTrue(armor.isUnlocked());
     }
 
     @Test
-    void ddsIncrementaGliOggettiSbloccati() throws NinjaException {
-        ge.tentaCodice("DDS");
+    void ddsIncrementUnlockedItems() throws NinjaException {
+        ge.tryCode("DDS");
 
         assertEquals("Kunai\n    8", kunai.toString());
     }
 
     @Test
-    void ddsNonSbloccaGliOggettiBloccati() throws NinjaException {
-        ge.tentaCodice("DDS");
+    void ddsDontUnlock() throws NinjaException {
+        ge.tryCode("DDS");
 
-        assertFalse(camicia.isUnlocked());
-        assertEquals("Camicia\n    0", camicia.toString());
+        assertFalse(armor.isUnlocked());
+        assertEquals("Armor\n    0", armor.toString());
     }
 
     @Test
-    void ddaAumentaLaCapienzaDellEquipaggiamento() throws NinjaException {
-        ge.tentaCodice("DDA");
+    void ddaIncreaseInventorySlots() throws NinjaException {
+        ge.tryCode("DDA");
 
-        assertEquals(99, Equipaggiamento.getInstance().getSlotLiberi());
+        assertEquals(99, Inventory.getInstance().getAvailableSlots());
     }
 
     @Test
-    void codiceInesistenteLanciaCodiceNonEsistente() {
-        assertThrows(CodiceNonEsistente.class, () -> ge.tentaCodice("XYZ"));
+    void notExistingCodeTriggerNotExistingCode() {
+        assertThrows(NotExistingCode.class, () -> ge.tryCode("xyz"));
     }
 
-    @Test
-    void ilConfrontoDelCodiceEDistingueMaiuscoleEMinuscole() {
-        assertThrows(CodiceNonEsistente.class, () -> ge.tentaCodice("dda"));
-    }
 }

@@ -13,7 +13,7 @@ import javafx.scene.layout.HBox;
 
 public class MainView extends BorderPane {
     private GameEngineController gec;
-    private HBox tasti;
+    private HBox keys;
     private Button startButton;
     private Button wButton;
     private Button aButton;
@@ -47,9 +47,9 @@ public class MainView extends BorderPane {
             else if (keyEvent.getCode() == KeyCode.D)
                 this.gec.clickD();
         });
-        this.tasti = new HBox(startButton,wButton,aButton,sButton,dButton);
-        this.tasti.setSpacing(10);
-        this.setBottom(tasti);
+        this.keys = new HBox(startButton,wButton,aButton,sButton,dButton);
+        this.keys.setSpacing(10);
+        this.setBottom(keys);
     }
 
     private void setSelection(boolean b){
@@ -62,7 +62,7 @@ public class MainView extends BorderPane {
 
     public void resetStart(){this.setSelection(true);}
 
-    public void setZonaCentro(Node n){this.setCenter(n);}
+    public void setCenterZone(Node n){this.setCenter(n);}
 
-    public void setZonaTop(Node n){this.setTop(n);}
+    public void setTopZone(Node n){this.setTop(n);}
 }

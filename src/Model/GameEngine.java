@@ -1,37 +1,40 @@
 package Model;
 
-import Model.CodiciEItems.*;
-import Model.Eccezioni.CodiceNonEsistente;
-import Model.Eccezioni.NinjaException;
+import Model.CodesAndWarehouse.*;
+import Model.Exceptions.NotExistingCode;
+import Model.Exceptions.NinjaException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameEngine {
-    private Equipaggiamento e;
-    private Inventario i;
-    private List<CodiceInterface> codici;
+    private Inventory i;
+    private Warehouse w;
+    private List<CodeInterface> codes;
 
-    public GameEngine(Inventario i){
-        this.i = i;
-        codici = new ArrayList<>();
-        codici.add(new DDA());
-        codici.add(new DDS());
-        codici.add(new DWA());
-        this.e = Equipaggiamento.getInstance();
+    public GameEngine(Warehouse w){
+        this.w = w;
+        codes = new ArrayList<>();
+        codes.add(new DDA());
+        codes.add(new DDS());
+        codes.add(new DWA());
+        this.i = Inventory.getInstance();
     }
 
-    public void tentaCodice(String code) throws NinjaException{
+    /**
+     * Runs the code matching the given string.
+     */
+    public void tryCode(String code) throws NinjaException{
 
         boolean find = false;
 
-        for(int i = 0; i < codici.size(); i++){
-            if (code.equals(codici.get(i).getCodice())){
-                codici.get(i).esegui(this.e,this.i);
+        for(int i = 0; i < codes.size(); i++){
+            if (code.equals(codes.get(i).getCode())){
+                codes.get(i).execute(this.i,this.w);
                 find = true;
             }
         }
 
-        if (!find) throw new CodiceNonEsistente();
+        if (!find) throw new NotExistingCode();
     }
 }

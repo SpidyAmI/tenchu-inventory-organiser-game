@@ -1,12 +1,12 @@
 # 🥷 Ninja Inventory Organiser
 
-Desktop application written in **Java** with **JavaFX** for the UI. It is a gamified inventory organiser for a ninja clan, built following OOP principles.
+Desktop application written in **Java** with **JavaFX** for the UI. It is a gamified warehouse organiser for a ninja clan, built following OOP principles.
 
 ---
 
 ## 📖 Brief Description
 
-**Ninja Inventory Organiser** lets you organise and monitor the clan's resources. Resources come in different rarities, and the rarest ones are locked at the start of the game. The application can be used with both keyboard shortcuts and mouse clicks, as described below.
+**Ninja Inventory Organiser** lets you organise and monitor the clan's resources. Resources come as common and rare, and the rare ones have a chance to be unique and are locked at the start of the game. The application can be used with both keyboard shortcuts and mouse clicks, as described below.
 
 <!-- TODO: add a screenshot of the application running, after the English translation is complete -->
 
@@ -74,7 +74,7 @@ Desktop application written in **Java** with **JavaFX** for the UI. It is a gami
 ## 🗺️ Roadmap
 
 - [X] Add unit tests (JUnit 5)
-- [ ] Translate code and comments to English
+- [X] Translate code and comments to English
 - [ ] Add screenshots
 - [ ] Complete the OOP principles section
 - [ ] Add the project tree in the Project Structure section
